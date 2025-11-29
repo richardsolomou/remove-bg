@@ -1,4 +1,6 @@
+import { usePostHog } from "@posthog/react";
 import { useCallback, useState } from "react";
+import { getFileSizeBucket } from "~/lib/analytics";
 import {
   type BackgroundRemovalOptions,
   processImageWithBackgroundRemoval,
@@ -12,6 +14,7 @@ type ProcessedImage = {
 };
 
 export function useImageProcessor() {
+  const posthog = usePostHog();
   const [processing, setProcessing] = useState(false);
   const [processedImages, setProcessedImages] = useState<ProcessedImage[]>([]);
   const [progress, setProgress] = useState(0);
@@ -68,6 +71,13 @@ export function useImageProcessor() {
       try {
         const processed = await processImage(file);
 
+        posthog?.capture("background_removed", {
+          processing_time_ms: processed.processingTime,
+          file_type: file.type,
+          file_size_bytes: file.size,
+          file_size_bucket: getFileSizeBucket(file.size),
+        });
+
         // Brief delay to show completion state before showing results
         await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -76,13 +86,20 @@ export function useImageProcessor() {
         setStatus("");
       } catch (error) {
         console.error(`Error processing ${file.name}:`, error);
+        posthog?.capture("background_removal_failed", {
+          error_message:
+            error instanceof Error ? error.message : "Unknown error",
+          file_type: file.type,
+          file_size_bytes: file.size,
+          file_size_bucket: getFileSizeBucket(file.size),
+        });
       } finally {
         setProcessing(false);
         setProgress(0);
         setStatus("");
       }
     },
-    [processImage]
+    [processImage, posthog]
   );
 
   const clearAll = useCallback(() => {

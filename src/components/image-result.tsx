@@ -1,3 +1,4 @@
+import { usePostHog } from "@posthog/react";
 import { useEffect, useRef } from "react";
 import ReactCompareImage from "react-compare-image";
 
@@ -13,17 +14,18 @@ type ImageResultProps = {
 };
 
 export function ImageResult({ image }: ImageResultProps) {
+  const posthog = usePostHog();
   const hasTrackedInteraction = useRef(false);
 
   useEffect(() => {
-    window.umami?.track("image_result_viewed", {
-      processing_time: image.processingTime,
+    posthog?.capture("image_result_viewed", {
+      processing_time_ms: image.processingTime,
     });
-  }, [image.processingTime]);
+  }, [image.processingTime, posthog]);
 
   const handleSliderInteraction = () => {
     if (!hasTrackedInteraction.current) {
-      window.umami?.track("comparison_slider_used");
+      posthog?.capture("comparison_slider_used");
       hasTrackedInteraction.current = true;
     }
   };

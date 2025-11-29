@@ -12,7 +12,7 @@ Thank you for your interest in contributing! This guide will help you get starte
 ### Setup
 
 ```bash
-git clone https://github.com/ras-sh/remove-bg.git
+git clone https://github.com/richardsolomou/remove-bg.git
 cd remove-bg
 pnpm install
 ```

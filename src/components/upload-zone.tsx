@@ -1,8 +1,10 @@
 "use client";
 
+import { usePostHog } from "@posthog/react";
 import { cn, Progress } from "@ras-sh/ui";
 import { Upload } from "lucide-react";
 import { useDropzone } from "react-dropzone";
+import { getFileSizeBucket } from "~/lib/analytics";
 
 type UploadZoneProps = {
   onDrop: (files: File[]) => void;
@@ -17,17 +19,32 @@ export function UploadZone({
   progress,
   status,
 }: UploadZoneProps) {
+  const posthog = usePostHog();
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: (files) => {
       const file = files[0];
       if (file) {
-        window.umami?.track("image_uploaded", {
+        posthog?.capture("image_uploaded", {
           file_type: file.type,
-          file_size: file.size,
+          file_size_bytes: file.size,
+          file_size_bucket: getFileSizeBucket(file.size),
           upload_method: isDragActive ? "drag_drop" : "file_picker",
         });
       }
       onDrop(files);
+    },
+    onDropRejected: (rejections) => {
+      const rejection = rejections[0];
+      if (rejection) {
+        const fileError = rejection.errors[0];
+        posthog?.capture("upload_rejected", {
+          error_code: fileError?.code,
+          file_type: rejection.file.type,
+          file_size_bytes: rejection.file.size,
+          file_size_bucket: getFileSizeBucket(rejection.file.size),
+        });
+      }
     },
     accept: {
       "image/jpeg": [".jpg", ".jpeg"],
@@ -75,7 +92,7 @@ export function UploadZone({
         </div>
       </div>
 
-      {processing && (
+      {!!processing && (
         <div className="mx-auto w-full max-w-md">
           <div className="mb-2 flex items-center justify-between text-sm text-zinc-300">
             <span>{status || "Processing..."}</span>

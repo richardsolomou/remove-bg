@@ -20,7 +20,7 @@ export function BackgroundRemover() {
 
   return (
     <div className="w-full">
-      {showResults && processedImages[0] ? (
+      {!!showResults && !!processedImages[0] ? (
         <ResultsView
           onDownloadImage={downloadImage}
           onProcessMore={clearAll}
