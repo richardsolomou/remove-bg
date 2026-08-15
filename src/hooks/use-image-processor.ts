@@ -20,39 +20,33 @@ export function useImageProcessor() {
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState<string>("");
 
-  const processImage = useCallback(
-    async (file: File): Promise<ProcessedImage> => {
-      const startTime = Date.now();
+  const processImage = useCallback(async (file: File): Promise<ProcessedImage> => {
+    const startTime = Date.now();
 
-      const reader = new FileReader();
-      const originalDataUrl = await new Promise<string>((resolve, reject) => {
-        reader.onload = (e) => resolve(e.target?.result as string);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
+    const reader = new FileReader();
+    const originalDataUrl = await new Promise<string>((resolve, reject) => {
+      reader.onload = (e) => resolve(e.target?.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
 
-      const options: BackgroundRemovalOptions = {
-        progress: (progressPercent, statusMessage) => {
-          setProgress(progressPercent);
-          setStatus(statusMessage);
-        },
-      };
+    const options: BackgroundRemovalOptions = {
+      progress: (progressPercent, statusMessage) => {
+        setProgress(progressPercent);
+        setStatus(statusMessage);
+      },
+    };
 
-      const processedDataUrl = await processImageWithBackgroundRemoval(
-        file,
-        options
-      );
-      const processingTime = Date.now() - startTime;
+    const processedDataUrl = await processImageWithBackgroundRemoval(file, options);
+    const processingTime = Date.now() - startTime;
 
-      return {
-        original: originalDataUrl,
-        processed: processedDataUrl,
-        filename: file.name,
-        processingTime,
-      };
-    },
-    []
-  );
+    return {
+      original: originalDataUrl,
+      processed: processedDataUrl,
+      filename: file.name,
+      processingTime,
+    };
+  }, []);
 
   const processFiles = useCallback(
     async (files: File[]) => {
@@ -87,8 +81,7 @@ export function useImageProcessor() {
       } catch (error) {
         console.error(`Error processing ${file.name}:`, error);
         posthog?.capture("background_removal_failed", {
-          error_message:
-            error instanceof Error ? error.message : "Unknown error",
+          error_message: error instanceof Error ? error.message : "Unknown error",
           file_type: file.type,
           file_size_bytes: file.size,
           file_size_bucket: getFileSizeBucket(file.size),
@@ -99,7 +92,7 @@ export function useImageProcessor() {
         setStatus("");
       }
     },
-    [processImage, posthog]
+    [processImage, posthog],
   );
 
   const clearAll = useCallback(() => {

@@ -12,19 +12,11 @@ type ProcessedImage = {
 
 type ResultsViewProps = {
   processedImage: ProcessedImage;
-  onDownloadImage: (
-    dataUrl: string,
-    filename: string,
-    format?: "png" | "webp" | "jpeg"
-  ) => void;
+  onDownloadImage: (dataUrl: string, filename: string, format?: "png" | "webp" | "jpeg") => void;
   onProcessMore: () => void;
 };
 
-export function ResultsView({
-  processedImage,
-  onDownloadImage,
-  onProcessMore,
-}: ResultsViewProps) {
+export function ResultsView({ processedImage, onDownloadImage, onProcessMore }: ResultsViewProps) {
   const posthog = usePostHog();
 
   function downloadImage(format: "png" | "jpeg" | "webp") {

@@ -10,17 +10,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <div className="mx-auto flex w-full max-w-4xl flex-col items-center justify-center space-y-12 p-8 transition-all duration-300 sm:p-12 md:p-16 lg:p-20">
       <header className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <h1 className="font-bold font-mono text-4xl text-zinc-100">
-            remove-bg
-          </h1>
+          <h1 className="font-bold font-mono text-4xl text-zinc-100">remove-bg</h1>
 
           <Button asChild>
             <a
               href="https://github.com/richardsolomou/remove-bg"
               onClick={() =>
                 posthog?.capture("github_link_clicked", {
-                  destination_url:
-                    "https://github.com/richardsolomou/remove-bg",
+                  destination_url: "https://github.com/richardsolomou/remove-bg",
                 })
               }
               rel="noopener noreferrer"
@@ -33,8 +30,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </div>
 
         <p className="font-sans text-xl text-zinc-300 leading-relaxed">
-          ✂️ AI-powered background removal that runs entirely in your browser. No
-          uploads, no paywalls, fully client-side.
+          ✂️ AI-powered background removal that runs entirely in your browser. No uploads, no
+          paywalls, fully client-side.
         </p>
       </header>
 
@@ -54,10 +51,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           target="_blank"
         >
           <Avatar className="size-5">
-            <AvatarImage
-              alt="Richard Solomou"
-              src="https://github.com/richardsolomou.png"
-            />
+            <AvatarImage alt="Richard Solomou" src="https://github.com/richardsolomou.png" />
             <AvatarFallback>RS</AvatarFallback>
           </Avatar>
           @richardsolomou

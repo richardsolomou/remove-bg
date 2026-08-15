@@ -4,11 +4,7 @@ const EXTENSION_REGEX = /\.[^/.]+$/;
 
 export function useImageDownloader() {
   const downloadImage = useCallback(
-    (
-      dataUrl: string,
-      filename: string,
-      format: "png" | "webp" | "jpeg" = "png"
-    ) => {
+    (dataUrl: string, filename: string, format: "png" | "webp" | "jpeg" = "png") => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
       const img = new Image();
@@ -43,14 +39,12 @@ export function useImageDownloader() {
 
       img.src = dataUrl;
     },
-    []
+    [],
   );
 
   const formatProcessingTime = useCallback((time: number) => {
     const ONE_SECOND = 1000;
-    return time < ONE_SECOND
-      ? `${time}ms`
-      : `${(time / ONE_SECOND).toFixed(1)}s`;
+    return time < ONE_SECOND ? `${time}ms` : `${(time / ONE_SECOND).toFixed(1)}s`;
   }, []);
 
   return {
