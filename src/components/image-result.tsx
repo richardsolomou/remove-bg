@@ -47,9 +47,7 @@ export function ImageResult({ image }: ImageResultProps) {
           sliderLineWidth={2}
         />
       </div>
-      <p className="text-center text-sm text-zinc-500">
-        Drag the slider to compare
-      </p>
+      <p className="text-center text-sm text-zinc-500">Drag the slider to compare</p>
     </div>
   );
 }

@@ -1,8 +1,4 @@
-import {
-  type Config,
-  preload,
-  removeBackground,
-} from "@imgly/background-removal";
+import { type Config, preload, removeBackground } from "@imgly/background-removal";
 
 export type BackgroundRemovalOptions = {
   progress?: (progress: number, status: string) => void;
@@ -14,7 +10,7 @@ let modelPreloaded = false;
 
 export async function processImageWithBackgroundRemoval(
   file: File,
-  options: BackgroundRemovalOptions = {}
+  options: BackgroundRemovalOptions = {},
 ): Promise<string> {
   try {
     const { progress } = options;
@@ -37,9 +33,7 @@ export async function processImageWithBackgroundRemoval(
           ? (key, current, total) => {
               console.log(`Loading model - ${key}: ${current}/${total}`);
               const MODEL_LOADING_MAX = 70; // Model loading takes 0-70% of progress
-              const progressPercent = Math.round(
-                (current / total) * MODEL_LOADING_MAX
-              );
+              const progressPercent = Math.round((current / total) * MODEL_LOADING_MAX);
               progress(progressPercent, "Loading AI model...");
             }
           : undefined,
@@ -71,10 +65,7 @@ export async function processImageWithBackgroundRemoval(
       result = await removeBackground(file, config);
       console.log("Direct file processing result:", result);
     } catch (fileError) {
-      console.warn(
-        "Direct file processing failed, trying with Image element:",
-        fileError
-      );
+      console.warn("Direct file processing failed, trying with Image element:", fileError);
 
       // Fallback to Image element approach
       progress?.(70, "Preparing image...");
@@ -118,11 +109,11 @@ export async function processImageWithBackgroundRemoval(
         reader.readAsDataURL(result);
       });
     } else if (result instanceof HTMLCanvasElement) {
-      finalResult = (result as HTMLCanvasElement).toDataURL("image/png");
+      finalResult = result.toDataURL("image/png");
     } else if (result instanceof ImageData) {
       // Convert ImageData to canvas and then to data URL
       const canvas = document.createElement("canvas");
-      const imageData = result as ImageData;
+      const imageData = result;
       canvas.width = imageData.width;
       canvas.height = imageData.height;
       const ctx = canvas.getContext("2d");
@@ -144,7 +135,8 @@ export async function processImageWithBackgroundRemoval(
   } catch (error) {
     console.error("Background removal failed:", error);
     throw new Error(
-      `Failed to remove background: ${error instanceof Error ? error.message : "Unknown error"}`
+      `Failed to remove background: ${error instanceof Error ? error.message : "Unknown error"}`,
+      { cause: error },
     );
   }
 }
