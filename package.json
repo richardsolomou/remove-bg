@@ -39,7 +39,7 @@
     "@tanstack/react-router": "^1.170.25",
     "@tanstack/react-start": "^1.168.42",
     "lucide-react": "^1.31.0",
-    "onnxruntime-web": "1.27.0",
+    "onnxruntime-web": "1.21.0",
     "posthog-js": "^1.415.5",
     "react": "^19.2.8",
     "react-compare-image": "^3.5.20",
