@@ -6,6 +6,8 @@ updates:
       interval: weekly
     cooldown:
       default-days: 7
+    ignore:
+      - dependency-name: onnxruntime-web
     groups:
       javascript-dependencies:
         patterns:
