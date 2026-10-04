@@ -27,7 +27,7 @@
     "check-types": "tsc --noEmit",
     "check": "oxfmt --check . && oxlint --type-aware --deny-warnings .",
     "fix": "oxfmt --write . && oxlint --type-aware --fix .",
-    "policy:check": "ras policy check"
+    "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
@@ -41,6 +41,7 @@
     "lucide-react": "^1.46.0",
     "onnxruntime-web": "1.21.0",
     "posthog-js": "^1.433.5",
+    "ras-stack": "^3.0.0",
     "react": "^19.3.0",
     "react-compare-image": "^3.5.22",
     "react-dom": "^19.3.0",
@@ -57,7 +58,7 @@
     "oxfmt": "0.68.0",
     "oxlint": "1.83.0",
     "oxlint-tsgolint": "7.0.2001",
-    "ras-stack": "0.47.9",
+    "ras-stack-config": "^1.0.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.3.0",
