@@ -2,7 +2,7 @@ minimumReleaseAge: 10080
 minimumReleaseAgeExclude:
   - 'posthog-*'
   - '@posthog/*'
-  - ras-stack@6.0.0
+  - ras-stack
 allowBuilds:
   '@posthog/cli': true
   core-js: false

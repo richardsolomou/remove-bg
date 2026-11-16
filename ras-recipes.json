@@ -74,8 +74,8 @@
       ]
     },
     "tooling": {
-      "version": 1,
-      "commit": "34e928fcdd0b6f90e42743cea6fc90e5c2c81685",
+      "version": 2,
+      "commit": "82fce4523ec914bd2e70aefd4bff84c10fb278c6",
       "files": {
         ".gitignore": ".gitignore",
         ".oxfmtrc.json": ".oxfmtrc.json",
@@ -90,8 +90,7 @@
         "Keeps the `fix` script and the lefthook pre-commit hook that runs it, which the application had before adopting recipes.",
         "Keeps the `~/*` path alias in `tsconfig.json`, which every application module imports through.",
         "Ignores `coverage/` and `.DS_Store` in `.gitignore` as well.",
-        "`allowBuilds` also lists `lefthook: true` for its git hook install and `protobufjs: false`, which `onnxruntime-web` pulls in.",
-        "`minimumReleaseAgeExclude` lists `ras-stack@6.0.0`, which was published inside the seven-day window when the application adopted recipes."
+        "`allowBuilds` also lists `lefthook: true` for its git hook install and `protobufjs: false`, which `onnxruntime-web` pulls in."
       ]
     }
   }
