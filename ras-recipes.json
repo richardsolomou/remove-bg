@@ -20,8 +20,8 @@
       "notes": []
     },
     "posthog-web": {
-      "version": 1,
-      "commit": "34e928fcdd0b6f90e42743cea6fc90e5c2c81685",
+      "version": 2,
+      "commit": "82fce4523ec914bd2e70aefd4bff84c10fb278c6",
       "files": {
         "scripts/posthogSourceMaps.test.ts": "scripts/posthogSourceMaps.test.ts",
         "scripts/posthogSourceMaps.ts": "scripts/posthogSourceMaps.ts",
@@ -34,7 +34,7 @@
         "src/server/posthogProxy.ts": "src/server/posthogProxy.ts"
       },
       "notes": [
-        "Reads the project token from `VITE_POSTHOG_KEY`, the Workers Builds variable the application already used, and fixes the host to EU Cloud whenever the token is set, so `VITE_POSTHOG_HOST` is unused.",
+        "`projectTokenVariable` is `VITE_POSTHOG_KEY`, the Workers Builds variable the application already used, and `defaultHost` is EU Cloud, where its project lives.",
         "`src/contracts/bundledPostHog.test.ts` checks that the bundled project reports to EU Cloud and stays off without a token."
       ]
     },
