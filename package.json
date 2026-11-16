@@ -43,16 +43,16 @@
     "@tanstack/react-router": "^1.170.46",
     "@tanstack/react-router-ssr-query": "^1.167.3",
     "@tanstack/react-start": "^1.169.5",
-    "lucide-react": "^1.62.0",
+    "lucide-react": "^1.70.0",
     "onnxruntime-web": "1.21.0",
     "posthog-js": "^1.450.0",
     "react": "^19.3.1",
     "react-compare-image": "^3.5.23",
     "react-dom": "^19.3.1",
-    "react-dropzone": "^20.1.4"
+    "react-dropzone": "^20.2.0"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.65.0",
+    "@cloudflare/vite-plugin": "1.68.0",
     "@posthog/rollup-plugin": "^1.6.4",
     "@tailwindcss/vite": "^4.3.5",
     "@types/node": "^26.6.5",
@@ -60,15 +60,15 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.3.0",
     "lefthook": "^2.2.2",
-    "oxfmt": "0.75.0",
-    "oxlint": "1.90.0",
+    "oxfmt": "0.78.0",
+    "oxlint": "1.93.0",
     "oxlint-tsgolint": "7.0.2005",
     "ras-stack": "^6.0.0",
     "tailwindcss": "^4.3.5",
     "typescript": "^7.0.2",
     "vite": "^8.3.5",
     "vitest": "^4.1.12",
-    "wrangler": "4.154.0"
+    "wrangler": "4.159.0"
   },
   "engines": {
     "node": ">=24 <25"
