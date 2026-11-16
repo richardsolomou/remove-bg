@@ -5,9 +5,9 @@ import type { QueryClient } from '@tanstack/react-query'
 import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
 import { chunkRecoveryScript, updateNoticeId } from '~/client/chunkRecovery'
+import { PostHogIntegration } from '~/client/posthog'
 import { DefaultCatchBoundary } from '~/components/default-catch-boundary'
 import { NotFound } from '~/components/not-found'
-import { PHProvider } from '~/components/ph-provider'
 import { seo } from '~/lib/seo'
 import appCss from '~/styles/app.css?url'
 
@@ -80,7 +80,7 @@ function RootDocument({ children }: { children: ReactNode }) {
         <p id={updateNoticeId} hidden className="bg-amber-100 px-4 py-2 text-center text-sm text-amber-950">
           A new version is available. Reload the page to continue.
         </p>
-        <PHProvider>{children}</PHProvider>
+        <PostHogIntegration>{children}</PostHogIntegration>
         <Scripts />
       </body>
     </html>
