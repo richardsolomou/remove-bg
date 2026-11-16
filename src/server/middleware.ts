@@ -31,10 +31,10 @@ export const canonicalHost = createMiddleware({ type: 'request' }).server(({ req
 
 export const securityHeaders: Record<string, string> = {
   // Inline scripts stay allowed because Start streams its hydration data as inline scripts, and the root route adds chunk recovery.
-  // The background removal model and ONNX Runtime download from staticimgly.com and run as blob modules and WebAssembly;
-  // the footer avatar comes from GitHub.
+  // Background removal fetches its model and ONNX Runtime from staticimgly.com, loads them as blob modules, and needs
+  // 'unsafe-eval' because its ndarray dependency compiles accessors with Function(); the footer avatar comes from GitHub.
   'content-security-policy':
-    "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://github.com https://avatars.githubusercontent.com; font-src 'self' data:; connect-src 'self' https://staticimgly.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://github.com https://avatars.githubusercontent.com; font-src 'self' data:; connect-src 'self' blob: https://staticimgly.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
   'referrer-policy': 'strict-origin-when-cross-origin',
   'permissions-policy': 'camera=(), microphone=(), geolocation=(), payment=()',
   'x-content-type-options': 'nosniff',
