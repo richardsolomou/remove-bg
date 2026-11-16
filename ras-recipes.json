@@ -1,0 +1,25 @@
+{
+  "source": "https://github.com/richardsolomou/ras-stack",
+  "recipes": {
+    "tooling": {
+      "version": 1,
+      "commit": "34e928fcdd0b6f90e42743cea6fc90e5c2c81685",
+      "files": {
+        ".gitignore": ".gitignore",
+        ".oxfmtrc.json": ".oxfmtrc.json",
+        ".oxlintrc.json": ".oxlintrc.json",
+        "AGENTS.md": "AGENTS.md",
+        "package.json": "package.json",
+        "pnpm-workspace.yaml": "pnpm-workspace.yaml",
+        "tsconfig.json": "tsconfig.json",
+        "vitest.config.ts": "vitest.config.ts"
+      },
+      "notes": [
+        "Keeps the `fix` script and the lefthook pre-commit hook that runs it, which the application had before adopting recipes.",
+        "Keeps the `~/*` path alias in `tsconfig.json`, which every application module imports through.",
+        "Ignores `coverage/` and `.DS_Store` in `.gitignore` as well.",
+        "`allowBuilds` also lists `lefthook: true` for its git hook install and `protobufjs: false`, which `onnxruntime-web` pulls in."
+      ]
+    }
+  }
+}
