@@ -1,6 +1,15 @@
 {
   "source": "https://github.com/richardsolomou/ras-stack",
   "recipes": {
+    "ci": {
+      "version": 1,
+      "commit": "34e928fcdd0b6f90e42743cea6fc90e5c2c81685",
+      "files": {
+        ".github/dependabot.yml": ".github/dependabot.yml",
+        ".github/workflows/ci.yml": ".github/workflows/ci.yml"
+      },
+      "notes": ["Dependabot ignores `onnxruntime-web`, pinned to the release known to work with `@imgly/background-removal`."]
+    },
     "deploy-cloudflare": {
       "version": 1,
       "commit": "34e928fcdd0b6f90e42743cea6fc90e5c2c81685",
