@@ -1,29 +1,29 @@
-import { usePostHog } from "@posthog/react";
-import { Button } from "@ras-sh/ui";
-import { Download, RotateCcw } from "lucide-react";
-import { ImageResult } from "~/components/image-result";
+import { usePostHog } from '@posthog/react'
+import { Button } from '@ras-sh/ui'
+import { Download, RotateCcw } from 'lucide-react'
+import { ImageResult } from '~/components/image-result'
 
 type ProcessedImage = {
-  original: string;
-  processed: string;
-  filename: string;
-  processingTime: number;
-};
+  original: string
+  processed: string
+  filename: string
+  processingTime: number
+}
 
 type ResultsViewProps = {
-  processedImage: ProcessedImage;
-  onDownloadImage: (dataUrl: string, filename: string, format?: "png" | "webp" | "jpeg") => void;
-  onProcessMore: () => void;
-};
+  processedImage: ProcessedImage
+  onDownloadImage: (dataUrl: string, filename: string, format?: 'png' | 'webp' | 'jpeg') => void
+  onProcessMore: () => void
+}
 
 export function ResultsView({ processedImage, onDownloadImage, onProcessMore }: ResultsViewProps) {
-  const posthog = usePostHog();
+  const posthog = usePostHog()
 
-  function downloadImage(format: "png" | "jpeg" | "webp") {
-    posthog?.capture("image_downloaded", {
+  function downloadImage(format: 'png' | 'jpeg' | 'webp') {
+    posthog?.capture('image_downloaded', {
       format,
-    });
-    onDownloadImage(processedImage.processed, processedImage.filename, format);
+    })
+    onDownloadImage(processedImage.processed, processedImage.filename, format)
   }
 
   return (
@@ -31,8 +31,8 @@ export function ResultsView({ processedImage, onDownloadImage, onProcessMore }: 
       <div className="flex flex-wrap items-center justify-center gap-2 md:justify-between">
         <Button
           onClick={() => {
-            posthog?.capture("process_new_image_clicked");
-            onProcessMore();
+            posthog?.capture('process_new_image_clicked')
+            onProcessMore()
           }}
           variant="default"
         >
@@ -41,15 +41,15 @@ export function ResultsView({ processedImage, onDownloadImage, onProcessMore }: 
         </Button>
 
         <div className="flex flex-wrap justify-center gap-2 md:justify-end">
-          <Button onClick={() => downloadImage("png")} variant="outline">
+          <Button onClick={() => downloadImage('png')} variant="outline">
             <Download className="size-4" />
             Download PNG
           </Button>
-          <Button onClick={() => downloadImage("jpeg")} variant="outline">
+          <Button onClick={() => downloadImage('jpeg')} variant="outline">
             <Download className="size-4" />
             Download JPEG
           </Button>
-          <Button onClick={() => downloadImage("webp")} variant="outline">
+          <Button onClick={() => downloadImage('webp')} variant="outline">
             <Download className="size-4" />
             Download WebP
           </Button>
@@ -58,5 +58,5 @@ export function ResultsView({ processedImage, onDownloadImage, onProcessMore }: 
 
       <ImageResult image={processedImage} />
     </div>
-  );
+  )
 }
