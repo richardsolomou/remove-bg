@@ -39,8 +39,8 @@
       ]
     },
     "start-app": {
-      "version": 1,
-      "commit": "34e928fcdd0b6f90e42743cea6fc90e5c2c81685",
+      "version": 2,
+      "commit": "82fce4523ec914bd2e70aefd4bff84c10fb278c6",
       "files": {
         "src/client/chunkRecovery.test.ts": "src/client/chunkRecovery.test.ts",
         "src/client/chunkRecovery.ts": "src/client/chunkRecovery.ts",
@@ -67,10 +67,9 @@
       },
       "notes": [
         "Keeps the stylesheet at `src/styles/app.css`, so Tailwind's `source('../')` points at `src/`, and it also imports the Geist fonts and `@ras-sh/ui`'s styles and scans that package for classes.",
-        "The root route keeps its `shellComponent`, SEO and icon head tags, and its own error and not-found components, so the root route's error and not-found pages render inside the document.",
+        "The root route keeps its SEO, font preload, and icon head tags, and its own error and not-found components.",
         "The router keeps the application's `DefaultCatchBoundary` and `NotFound` as its default error and not-found components.",
-        "`vite.config.ts` resolves the `~/*` alias with Vite's `resolve.tsconfigPaths`.",
-        "The Content Security Policy also allows `staticimgly.com`, blob URLs, workers, and `'unsafe-eval'` (the `ndarray` dependency of `@imgly/background-removal` compiles code with `Function()`) for the background removal model and ONNX Runtime, and GitHub images for the footer avatar."
+        "`vite.config.ts` resolves the `~/*` alias with Vite's `resolve.tsconfigPaths`."
       ]
     },
     "tooling": {

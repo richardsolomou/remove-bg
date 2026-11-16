@@ -2,7 +2,7 @@
 import geistWoff2 from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url'
 import geistMonoWoff2 from '@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2?url'
 import type { QueryClient } from '@tanstack/react-query'
-import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
+import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
 import { chunkRecoveryScript, updateNoticeId } from '~/client/chunkRecovery'
 import { PostHogIntegration } from '~/client/posthog'
@@ -66,11 +66,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   }),
   errorComponent: DefaultCatchBoundary,
   notFoundComponent: () => <NotFound />,
-  shellComponent: RootDocument,
+  shellComponent: Document,
+  component: Root,
 })
 
-// A shell rather than a component, so the root route's error and not-found pages render inside the document too.
-function RootDocument({ children }: { children: ReactNode }) {
+// A shell keeps the root's error and not-found pages inside the document, and `Root`'s providers inside the root's error boundary.
+function Document({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -80,9 +81,17 @@ function RootDocument({ children }: { children: ReactNode }) {
         <p id={updateNoticeId} hidden className="bg-amber-100 px-4 py-2 text-center text-sm text-amber-950">
           A new version is available. Reload the page to continue.
         </p>
-        <PostHogIntegration>{children}</PostHogIntegration>
+        {children}
         <Scripts />
       </body>
     </html>
+  )
+}
+
+function Root() {
+  return (
+    <PostHogIntegration>
+      <Outlet />
+    </PostHogIntegration>
   )
 }
